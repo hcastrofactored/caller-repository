@@ -6,18 +6,16 @@ on:
 
 jobs:
 
-  deploy:
-    runs-on: ubuntu-latest
+  call-workflow:
     permissions:
-        id-token: write
-        contents: read
-
-    steps:
-      - uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
-        with:
-          aws_region: us-east-1
-          bucket_name: ${{ vars.BUCKET_NAME }}
-          dev_trigger_prefix: 'experiment'
-          prod_trigger_prefix: 'release'
-        secrets:
+      id-token: write
+      contents: read
+    
+    uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
+    with:
+      aws_region: us-east-1
+      bucket_name: ${{ vars.BUCKET_NAME }}
+      dev_trigger_prefix: 'experiment'
+      prod_trigger_prefix: 'release'
+    secrets:
           aws_role_to_assume: ${{ secrets.ROLE_TO_ASSUME }}
