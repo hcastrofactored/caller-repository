@@ -10,7 +10,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    
+    environment: DEV
     uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
     with:
       aws_region: us-east-1
