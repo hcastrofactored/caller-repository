@@ -43,7 +43,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    
+    needs: [EnvDevSetup , EnvProdSetup]
     uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
     with:
       aws_region: us-east-1
