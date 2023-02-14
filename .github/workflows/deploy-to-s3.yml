@@ -45,8 +45,8 @@ jobs:
     if: ${{ always() }}
     needs: [EnvDevSetup , EnvProdSetup]
     uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
+    secrets: inherit
     with:
       aws_region: us-east-1
       s3_path: ${{ vars.BUCKET_NAME }}
-    secrets:
-          aws_role_to_assume: ${{ secrets.ROLE_TO_ASSUME }}
+   
