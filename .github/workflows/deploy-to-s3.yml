@@ -6,6 +6,38 @@ on:
 
 jobs:
 
+  env:
+    
+    DEV_TRIGGER_PREFIX: "experiment"
+    PROD_TRIGGER_PREFIX: "release"
+
+  EnvDevSetup:
+
+    name: Setup Dynamic DEV Environment Variables
+    if:  startsWith(github.event.release.tag_name, ${{ env.DEV_TRIGGER_PREFIX }})
+    runs-on: ubuntu-latest
+    environment: DEV
+    outputs:
+      bucket-name: ${{ vars.BUCKET_NAME }}
+      aws-region: ${{ vars.AWS_REGION }}
+
+    steps:
+      - run: echo "Exposing DEV env vars"
+  
+  EnvProdSetup:
+
+    name: Setup Dynamic PROD Environment Variables
+    if:  startsWith(github.event.release.tag_name, ${{ env.PROD_TRIGGER_PREFIX }})
+    runs-on: ubuntu-latest
+    environment: PROD
+    outputs:
+      bucket-name: ${{ vars.BUCKET_NAME }}
+      aws-region: ${{ vars.AWS_REGION }}
+
+    steps:
+      - run: echo "Exposing PROD env vars"
+
+
   call-workflow:
 
     permissions:
@@ -15,8 +47,6 @@ jobs:
     uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
     with:
       aws_region: us-east-1
-      bucket_name: ${{ vars.BUCKET_NAME }}
-      dev_trigger_prefix: 'experiment'
-      prod_trigger_prefix: 'release'
+      s3_path: ${{ vars.BUCKET_NAME }}
     secrets:
           aws_role_to_assume: ${{ secrets.ROLE_TO_ASSUME }}
