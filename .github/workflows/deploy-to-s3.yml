@@ -49,5 +49,3 @@ jobs:
     with:
       aws_region: us-east-1
       s3_path: ${{ vars.BUCKET_NAME }}
-    secrets:
-          aws_role_to_assume: ${{ secrets.ROLE_TO_ASSUME }}
