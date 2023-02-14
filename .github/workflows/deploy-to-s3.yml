@@ -4,12 +4,12 @@ on:
   workflow_dispatch:
 
 
-jobs:
+env:
 
-  env:
-    
-    DEV_TRIGGER_PREFIX: "experiment"
-    PROD_TRIGGER_PREFIX: "release"
+  DEV_TRIGGER_PREFIX: "experiment"
+  PROD_TRIGGER_PREFIX: "release"
+
+jobs:
 
   EnvDevSetup:
 
