@@ -13,7 +13,7 @@ jobs:
   EnvDevSetup:
 
     name: Setup Dynamic DEV Environment Variables
-    if:  startsWith(github.event.release.tag_name, ${{ env.DEV_TRIGGER_PREFIX }})
+    if:  startsWith(github.event.release.tag_name, 'experiment')
     runs-on: ubuntu-latest
     environment: DEV
     outputs:
@@ -26,7 +26,7 @@ jobs:
   EnvProdSetup:
 
     name: Setup Dynamic PROD Environment Variables
-    if:  startsWith(github.event.release.tag_name,  ${{ env.PROD_TRIGGER_PREFIX }})
+    if:  startsWith(github.event.release.tag_name,  'release')
     runs-on: ubuntu-latest
     environment: PROD
     outputs:
