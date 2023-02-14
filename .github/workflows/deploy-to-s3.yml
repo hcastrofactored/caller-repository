@@ -42,6 +42,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    if: ${{ always() }}
     needs: [EnvDevSetup , EnvProdSetup]
     uses: hcastrofactored/github-actions-testing/.github/workflows/rw-deploy-multibranch.yml@main
     with:
