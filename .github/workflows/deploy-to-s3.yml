@@ -1,8 +1,8 @@
 name: Call s3 load
 
-on: 
-  workflow_dispatch:
-
+on:
+  release:
+    types: [published]
 
 env:
   DEV_TRIGGER_PREFIX: "experiment"
